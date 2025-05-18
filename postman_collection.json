@@ -1,0 +1,671 @@
+{
+	"info": {
+		"_postman_id": "your-collection-id",
+		"name": "Product API",
+		"description": "API для управления продуктами",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Базовые CRUD операции",
+			"item": [
+				{
+					"name": "Получить все продукты",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить продукт по ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создать продукт",
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "http://localhost:8080/api/products",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Тестовый продукт\",\n    \"description\": \"Описание тестового продукта\",\n    \"price\": 100.50,\n    \"category\": \"Тестовая категория\",\n    \"stock\": 10,\n    \"discount\": 0,\n    \"featured\": false,\n    \"tags\": [\"тест\", \"пример\"],\n    \"sku\": \"TEST-001\",\n    \"barcode\": \"123456789\",\n    \"weight\": 1.5,\n    \"dimensions\": \"10x20x30\",\n    \"status\": \"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить продукт",
+					"request": {
+						"method": "PUT",
+						"url": {
+							"raw": "http://localhost:8080/api/products/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Обновленный продукт\",\n    \"description\": \"Обновленное описание\",\n    \"price\": 150.75,\n    \"category\": \"Обновленная категория\",\n    \"stock\": 20,\n    \"discount\": 10,\n    \"featured\": true,\n    \"tags\": [\"обновленный\", \"тест\"],\n    \"sku\": \"TEST-002\",\n    \"barcode\": \"987654321\",\n    \"weight\": 2.0,\n    \"dimensions\": \"15x25x35\",\n    \"status\": \"active\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить продукт",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "http://localhost:8080/api/products/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Фильтрация и поиск",
+			"item": [
+				{
+					"name": "Получить продукты по категории",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/category/:category",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "category", ":category"],
+							"variable": [
+								{
+									"key": "category",
+									"value": "Тестовая категория"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Поиск продуктов",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/search?q=тест",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "search"],
+							"query": [
+								{
+									"key": "q",
+									"value": "тест"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить продукты по диапазону цен",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/price-range?min=50&max=200",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "price-range"],
+							"query": [
+								{
+									"key": "min",
+									"value": "50"
+								},
+								{
+									"key": "max",
+									"value": "200"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить продукты в наличии",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/in-stock",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "in-stock"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить количество товара",
+					"request": {
+						"method": "PUT",
+						"url": {
+							"raw": "http://localhost:8080/api/products/:id/stock",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", ":id", "stock"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stock\": 15\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Категории и статистика",
+			"item": [
+				{
+					"name": "Получить все категории",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/categories",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "categories"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить статистику",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/stats",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "stats"]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Пакетные операции",
+			"item": [
+				{
+					"name": "Создать несколько продуктов",
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "http://localhost:8080/api/products/batch",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "batch"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"Продукт 1\",\n        \"description\": \"Описание 1\",\n        \"price\": 100,\n        \"category\": \"Категория 1\",\n        \"stock\": 10\n    },\n    {\n        \"name\": \"Продукт 2\",\n        \"description\": \"Описание 2\",\n        \"price\": 200,\n        \"category\": \"Категория 2\",\n        \"stock\": 20\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить несколько продуктов",
+					"request": {
+						"method": "PUT",
+						"url": {
+							"raw": "http://localhost:8080/api/products/batch",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "batch"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ids\": [\"{{product_id_1}}\", \"{{product_id_2}}\"],\n    \"update\": {\n        \"price\": 150,\n        \"stock\": 15\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удалить несколько продуктов",
+					"request": {
+						"method": "DELETE",
+						"url": {
+							"raw": "http://localhost:8080/api/products/batch",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "batch"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ids\": [\"{{product_id_1}}\", \"{{product_id_2}}\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "История и аналитика",
+			"item": [
+				{
+					"name": "Получить историю продукта",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/:id/history",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", ":id", "history"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить популярные продукты",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/popular?limit=5",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "popular"],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить новые продукты",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/new?limit=5",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "new"],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить продукты со скидкой",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/discount",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "discount"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить скидку продукта",
+					"request": {
+						"method": "PUT",
+						"url": {
+							"raw": "http://localhost:8080/api/products/:id/discount",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", ":id", "discount"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"discount\": 15\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Рекомендации",
+			"item": [
+				{
+					"name": "Получить похожие продукты",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/similar/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "similar", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить связанные продукты",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/related/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "related", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить трендовые продукты",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/trending?limit=5",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "trending"],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить рекомендуемые продукты",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/featured",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "featured"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Обновить статус рекомендации",
+					"request": {
+						"method": "PUT",
+						"url": {
+							"raw": "http://localhost:8080/api/products/:id/feature",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", ":id", "feature"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"featured\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Импорт/экспорт",
+			"item": [
+				{
+					"name": "Экспорт продуктов",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/export",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "export"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Импорт продуктов",
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "http://localhost:8080/api/products/import",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "import"]
+						},
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"name\": \"Импортированный продукт 1\",\n        \"description\": \"Описание 1\",\n        \"price\": 100,\n        \"category\": \"Категория 1\",\n        \"stock\": 10\n    },\n    {\n        \"name\": \"Импортированный продукт 2\",\n        \"description\": \"Описание 2\",\n        \"price\": 200,\n        \"category\": \"Категория 2\",\n        \"stock\": 20\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Валидация и проверка",
+			"item": [
+				{
+					"name": "Проверить валидность продукта",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/validate/:id",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "validate", ":id"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{product_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить дубликаты продуктов",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/duplicates",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "duplicates"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить продукты, которых нет в наличии",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/out-of-stock",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "out-of-stock"]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить продукты с низким запасом",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/api/products/low-stock?threshold=5",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["api", "products", "low-stock"],
+							"query": [
+								{
+									"key": "threshold",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+} 
