@@ -12,7 +12,7 @@ API для управления продуктами, разработанное
 
 1. Клонируйте репозиторий:
 ```bash
-git clone https://github.com/yourusername/product_api.git
+git clone https://github.com/Afra1m/product_api.git
 cd product_api
 ```
 
@@ -192,6 +192,3 @@ product_api/
 └── README.md            # Документация
 ```
 
-## Лицензия
-
-MIT 
